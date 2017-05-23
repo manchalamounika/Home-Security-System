@@ -4,7 +4,7 @@
 package scu.coen275.client;
 
 /**
- * @author santhosh
+ * @author mounika
  *
  */
 public class SampleAA {
