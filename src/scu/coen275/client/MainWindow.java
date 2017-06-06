@@ -2,25 +2,19 @@
  * 
  */
 package scu.coen275.client;
+import java.awt.event.*;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import scu.coen275.sosafe.BillGenerator;
+import scu.coen275.sosafe.BuildingView;
 
-import scu.coen275.sosafe.*;
-
-/**
- * @author mounika
- *
- */
 public class MainWindow {
 	public JFrame mainFrame;
 	public MainWindow(){
 		
 		mainFrame = new JFrame("Room Layout");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(1000, 1000);	
+		mainFrame.setSize(1200, 1200);	
 	}
 
 	public static void main(String[] args) {
@@ -30,7 +24,7 @@ public class MainWindow {
 		BuildingView m = new BuildingView(mw.mainFrame);
 		BuildingView simulation = new BuildingView(mw.mainFrame);
 		
-		ImageIcon profile_icon = new ImageIcon("res/user_profile.png");
+		ImageIcon profile_icon = new ImageIcon("res/user_profile");
 		tabbedPane.addTab("BuildingLayout",profile_icon,m.createWindow(false));
 		tabbedPane.addTab("Customer Profile",profile_icon,new JPanel());
 		tabbedPane.addTab("BillingInfo",profile_icon,new BillGenerator());
