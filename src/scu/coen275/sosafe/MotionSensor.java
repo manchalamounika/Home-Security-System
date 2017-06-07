@@ -1,16 +1,7 @@
-/**
- * @author mounika
- *
- */
 package scu.coen275.sosafe;
-
 import java.awt.Color;
 
 import javax.swing.JLabel;
-
-/**
- * 
- */
 
 /**
  * @author mounika
@@ -25,7 +16,12 @@ public class MotionSensor extends Sensor {
 		this.setMotionSensorName(name);
 		motionSensor.setName(this.getMotionSensorName());
 		motionSensor.setOpaque(true);
-		motionSensor.setBackground(Color.gray);
+		super.sensor_activated = Boolean.parseBoolean(super.findFromPropertiesFile(this.getMotionSensorName()));
+		if(super.sensor_activated) {
+			motionSensor.setBackground(Color.GREEN);
+		}
+		else 
+			motionSensor.setBackground(Color.gray);
 	}
 
 	/**
@@ -43,8 +39,8 @@ public class MotionSensor extends Sensor {
 		System.out.println("motionSensorId::::"+ motionSensorName);
 	}
 	public JLabel getMotionSensor() {
+		motionSensor.setVisible(false);
 		return motionSensor;
 	}
 
 }
-

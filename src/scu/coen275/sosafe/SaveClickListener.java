@@ -55,8 +55,11 @@ public class SaveClickListener implements ActionListener {
 				listAllComponentsIn(this.mainFrame);
 				
 				if(tempSensor.isSelected()) {
+					
+
 					String tempsensorInfo = tempSensor.isSelected()?"temperature_sensor_"+jc.getSelectedItem().toString():"";
 					JLabel a = findComponent(tempsensorInfo);
+					a.setVisible(true);
 					a.setBackground(Color.GREEN);
 					sensor_state.setProperty("temperature_sensor_"+jc.getSelectedItem().toString(), String.valueOf(true));
 				
@@ -75,6 +78,7 @@ public class SaveClickListener implements ActionListener {
 				if(motionSensor.isSelected()) {
 					String motionsensorInfo = motionSensor.isSelected()?"motion_sensor_"+jc.getSelectedItem().toString():"";
 					JLabel b = findComponent(motionsensorInfo);
+					b.setVisible(true);
 					b.setBackground(Color.GREEN);
 					sensor_state.setProperty("motion_sensor_"+jc.getSelectedItem().toString(), String.valueOf(true));
 				}

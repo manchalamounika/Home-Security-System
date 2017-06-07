@@ -1,15 +1,7 @@
-/**
- * @author mounika
- *
- */
 package scu.coen275.sosafe;
 import java.awt.Color;
 
 import javax.swing.JLabel;
-
-/**
- * 
- */
 
 /**
  * @author mounika
@@ -19,12 +11,18 @@ public class TemperatureSensor extends Sensor {
 	private String tempSensorName;
 	private JLabel tempSensor;
 	
+	
 	public TemperatureSensor(String name) {
 		tempSensor = new JLabel("TempSensor");
 		this.setTempSensorName(name);
 		tempSensor.setName(this.getTempSensorName());
 		tempSensor.setOpaque(true);
-		tempSensor.setBackground(Color.gray);
+		super.sensor_activated = Boolean.parseBoolean(super.findFromPropertiesFile(this.getTempSensorName()));
+		if(super.sensor_activated) {
+			tempSensor.setBackground(Color.GREEN);
+		}
+		else 
+			tempSensor.setBackground(Color.gray);
 	}
 
 	/**
@@ -42,6 +40,7 @@ public class TemperatureSensor extends Sensor {
 		System.out.println("tempSensorId::::"+ tempSensorName);
 	}
 	public JLabel getTempSensor() {
+		tempSensor.setVisible(super.sensor_activated);
 		return tempSensor;
 	}
 	
