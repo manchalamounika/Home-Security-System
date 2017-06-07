@@ -9,15 +9,21 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
-public class BuildingView {
+public class BuildingView {	
 	private JPanel twoColPanel, roomsPanel, formPanel,formElePanel, simulationPanel;
 	private JFrame mainFrame;
 	private ArrayList<Room> roomsArr;
 	public BuildingView(JFrame mainFrame) {
-		this.mainFrame =mainFrame;
+		this.mainFrame = mainFrame;
+		//this.createWindow();
+	}
+	public BuildingView() {
 		//this.createWindow();
 	}
 
+	public ArrayList<Room>  getRoomsArray() {
+		return this.roomsArr;
+	}
 	public JPanel createWindow(boolean flag) {
 		//JSONObject jo = new JSONObject()
 		twoColPanel = new JPanel(new GridLayout(1,2));
@@ -27,7 +33,7 @@ public class BuildingView {
 		formPanel = new JPanel(new FlowLayout());
 		formElePanel = new JPanel(new GridLayout(2,1));
 		simulationPanel = new JPanel();
-		BoxLayout simulationLayout = new BoxLayout(simulationPanel, BoxLayout.Y_AXIS);
+		BoxLayout simulationLayout = new BoxLayout(simulationPanel, BoxLayout.X_AXIS);
 		simulationPanel.setLayout(new FlowLayout());
 		roomsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		formPanel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -74,6 +80,10 @@ public class BuildingView {
 		JComboBox sBox = simBox.createCustomCombo(roomsArr);
 		bFireIn.setActionCommand("fire");
 		bFireIn.addActionListener(new FireInListener(twoColPanel,sBox));
+		
+		bBreakIn.setActionCommand("breakIn");
+		bBreakIn.addActionListener(new BreakInListener(twoColPanel,sBox));
+		
 		simulationPanel.add(sBox);
 		simulationPanel.add(bFireIn);
 		simulationPanel.add(bBreakIn);
@@ -82,5 +92,5 @@ public class BuildingView {
 		//https://docs.oracle.com/javase/tutorial/uiswing/components/tabbedpane.html
 		return twoColPanel;
 	}
-
+	
 }

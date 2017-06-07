@@ -10,28 +10,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-/**
- * 
- */
-
+import javax.swing.*;
 /**
  * @author mounika
  *
  */
-public class FireInListener implements ActionListener {
+public class BreakInListener implements ActionListener {
 	JComboBox simBox;
 	JPanel twoColPanel;
 	private ArrayList<Component> components1;
 	private Timer timer;
 
-	public FireInListener(JPanel twoColPanel, JComboBox simBox) {
+	public BreakInListener(JPanel twoColPanel, JComboBox simBox) {
 		this.simBox =simBox;
 		this.twoColPanel = twoColPanel;
 		components1 = new ArrayList<Component>();
@@ -46,8 +36,8 @@ public class FireInListener implements ActionListener {
 		listAllComponentsIn(this.twoColPanel);
 		JPanel roomPanelA = findComponent(simBox.getSelectedItem().toString());
 		System.out.println("roomPanelA:::::::"+roomPanelA);
-		Icon myImgIcon = new ImageIcon("res/fire_sprinkler.gif");
-		Icon myImgIcon1 = new ImageIcon("res/flames.gif");
+		Icon myImgIcon = new ImageIcon("res/breakIn.gif");
+		Icon myImgIcon1 = new ImageIcon("res/breakIn.gif");
 		JLabel imageLbl = new JLabel(myImgIcon);
 		Boolean sensor_enabled = Boolean.parseBoolean(findFromPropertiesFile("temperature_sensor_"+simBox.getSelectedItem().toString()));
 		if(sensor_enabled) {
@@ -114,7 +104,7 @@ public class FireInListener implements ActionListener {
 		}
 		catch(IOException e){
 		}
-		System.out.println("FireInListenerrrrrrr"+pflag);
+		System.out.println("BreakInListenerrrrrrrrrrrrrrrrrrr"+pflag);
 		return pflag;
 		
 	}

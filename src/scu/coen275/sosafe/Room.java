@@ -1,6 +1,7 @@
 package scu.coen275.sosafe;
 
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -35,6 +36,7 @@ public class Room extends JPanel{
 		tempSensor = new TemperatureSensor(this.getRoomName());
 		motionSensor = new MotionSensor(this.getRoomName());
 		
+		
 //		tempSensor = new JLabel("TempSensor");
 //		tempSensor.setName("temp_"+this.getRoomName());
 //		tempSensor.setOpaque(true);
@@ -54,6 +56,7 @@ public class Room extends JPanel{
 		roomPanel.setLayout(roomLayout);
 		roomPanel.add(tempSensor.getTempSensor());
 		roomPanel.add(motionSensor.getMotionSensor());
+
 		String roomName =this.getRoomName(); 
 		roomPanel.setName(roomName);
 		roomOuterPanel.setBorder(BorderFactory.createTitledBorder(roomName));
@@ -62,9 +65,6 @@ public class Room extends JPanel{
 //			Icon myImgIcon = new ImageIcon("res/flames.gif");
 //			JLabel imageLbl = new JLabel(myImgIcon);
 //			roomPanel.add(imageLbl, BorderLayout.CENTER);
-		
-
-		
 		return roomOuterPanel;
 	}
 	
@@ -78,11 +78,5 @@ public class Room extends JPanel{
 	
 	public String getRoomName() {
 		return  "Room_" + this.getRoomId();
-	}
-	
-	
-
-	
+	}	
 }
-
-
