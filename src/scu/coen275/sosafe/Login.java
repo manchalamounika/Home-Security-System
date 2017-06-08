@@ -12,27 +12,56 @@ public class Login extends JFrame implements ActionListener
 	private JFrame loginFrame;
 	JButton SUBMIT;
 	JPanel panel, infoPanel;
-	JLabel label;
+	JLabel pinLabel, headLabel, lineLabel;
 	final JTextField  text;
+	private JButton submitButton;
 
 	public Login()
 	{
 
 		Container cn = getContentPane();
 		cn.setLayout(new FlowLayout());
+        cn.setBackground(Color.black);
+        cn.add(Box.createVerticalStrut(650));
 
-		label = new JLabel();
-		label.setText("PIN:");
-		text = new JPasswordField(5);
+		
+		panel=new JPanel(new FlowLayout());
+		ImageIcon image = new ImageIcon("img/security.jpg");
+		JLabel picLabel = new JLabel(image);
+		
+		
+		headLabel = new JLabel("SoSafe Security System");
+		headLabel.setFont(new Font("Cambria", Font.BOLD, 25));
+		headLabel.setForeground(new Color(0, 12, 155));
+		
+		lineLabel = new JLabel("Enter the Pin to login into System");
+		lineLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+		lineLabel.setForeground(Color.DARK_GRAY);
+		
+		pinLabel = new JLabel("PIN:");
+		pinLabel.setFont(new Font("Serif", Font.BOLD, 18));
+		pinLabel.setForeground(new Color(0, 12, 155));
+	
+		text = new JPasswordField(10);
+		text.setPreferredSize(new Dimension(80, 30));
 
-		SUBMIT=new JButton("SUBMIT");
+		submitButton=new JButton("SUBMIT");
+		submitButton.setBackground(Color.red);
+		submitButton.setFont(new Font("Serif", Font.BOLD, 15));
+		submitButton.setForeground(Color.WHITE);
 
-		panel=new JPanel(new GridLayout(3,1));
-		panel.add(label);
+		panel.add(headLabel);
+		panel.add(picLabel);
+		
+	    panel.setPreferredSize(new Dimension(300, 400));
+	    panel.add(lineLabel);
+	    panel.add(new JLabel("                  "));
+		panel.add(pinLabel);
 		panel.add(text);
-		panel.add(SUBMIT);
+		panel.add(new JLabel("   "));
+		panel.add(submitButton);
 		add(panel,BorderLayout.CENTER);
-		SUBMIT.addActionListener(this);
+		submitButton.addActionListener(this);
 		setTitle("LOGIN SCREEN");
 	}
 
