@@ -15,8 +15,9 @@ public class Customer {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Address getAddress() {
-		return address;
+	public String getAddress() {
+		System.out.println(address.toString());
+		return address.toString();
 	}
 	public void setAddress(Address address) {
 		this.address = address;

@@ -14,5 +14,10 @@ public class Address {
 		this.zipcode = zip;
 		
 	}
+	@Override
+	public String toString() {
+		return "line1=" + line1 + ", line2=" + line2 + ", city=" + city + ", state=" + state + ", zipcode="
+				+ zipcode ;
+	}
 	
 }

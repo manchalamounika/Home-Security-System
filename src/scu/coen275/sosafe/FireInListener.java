@@ -14,12 +14,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
-/**
- * 
- */
 
 /**
  * @author mounika
@@ -27,7 +24,7 @@ import javax.swing.Timer;
  */
 public class FireInListener implements ActionListener {
 	JComboBox simBox;
-	JPanel twoColPanel;
+	JPanel twoColPanel,pp;
 	private ArrayList<Component> components1;
 	private Timer timer;
 
@@ -51,56 +48,56 @@ public class FireInListener implements ActionListener {
 		JLabel imageLbl = new JLabel(myImgIcon);
 		Boolean sensor_enabled = Boolean.parseBoolean(findFromPropertiesFile("temperature_sensor_"+simBox.getSelectedItem().toString()));
 		if(sensor_enabled) {
-		
-		//http://makeagif.com/gif/fire-sprinkler-test-with-water-_AI68u
-		Timer SimpleTimer = new Timer(5500, new ActionListener(){
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		    	imageLbl.setVisible(false);
-		    	
-		    }
-		});
-		SimpleTimer.start();
+			Billing b= new Billing();
+			b.fireDetected("A fire has occurred on");
+			roomPanelA.add(imageLbl, BorderLayout.CENTER);
+			roomPanelA.revalidate();
+			roomPanelA.repaint();
+			
+			JOptionPane.showMessageDialog(twoColPanel,"A call is being placed to Police department");
+			//http://makeagif.com/gif/fire-sprinkler-test-with-water-_AI68u
+			Timer SimpleTimer = new Timer(5500, new ActionListener(){
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					imageLbl.setVisible(false);
+				}
+			});
+			SimpleTimer.start();
 		}
 		else
 		{
 			imageLbl.setIcon(myImgIcon1);
+			roomPanelA.add(imageLbl, BorderLayout.CENTER);
+			roomPanelA.revalidate();
+			roomPanelA.repaint();
 		}
-		roomPanelA.add(imageLbl, BorderLayout.CENTER);
-		roomPanelA.revalidate();
-		roomPanelA.repaint();
+
 	}
-	
+
 	public void listAllComponentsIn(Container parent)
 	{
-	    for (Component c : parent.getComponents())
-	    {
-	        //System.out.println("Panellllllllllllllllllllllllll "+c.getName());
-	    	if(c!=null && c.getName()!=null && c instanceof JPanel) {
-		        //System.out.println("insideeeeeeeeeeeeee "+c.getName());
-	    		components1.add(c);	
-	    	}
-	        if (c instanceof Container)
-	            listAllComponentsIn((Container)c);
-	    }
+		for (Component c : parent.getComponents())
+		{
+			if(c!=null && c.getName()!=null && c instanceof JPanel) {
+				components1.add(c);	
+			}
+			if (c instanceof Container)
+				listAllComponentsIn((Container)c);
+		}
 	}
-	
+
 	public JPanel findComponent(String panelName)
 	{
 		JPanel temp = null;
-	   for(int i =0; i<components1.size(); i++) {
-		   System.out.println("findComponent------->"+components1.get(i).getName() +":::::panelName"+panelName);
-		   if(components1.get(i).getName().equals(panelName)){
-			  temp = (JPanel) components1.get(i);
-			  System.out.println("temp------------"+temp);
-			  //components.get(i).setBackground(Color.BLUE);;
-			  //System.out.println("My Label Triggered");
-		   }
-	   }
-	return temp;
-	    
+		for(int i =0; i<components1.size(); i++) {
+			if(components1.get(i).getName().equals(panelName)){
+				temp = (JPanel) components1.get(i);
+			}
+		}
+		return temp;
+
 	}
-	
+
 	private  String findFromPropertiesFile(String propertyNm) {
 		FileInputStream in =null;
 		String pflag =null;
@@ -114,8 +111,7 @@ public class FireInListener implements ActionListener {
 		}
 		catch(IOException e){
 		}
-		System.out.println("FireInListenerrrrrrr"+pflag);
 		return pflag;
-		
+
 	}
 }
