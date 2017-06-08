@@ -29,7 +29,7 @@ public class BillGenerator extends Component {
 
 
 	private JPanel custInfoPanel, twoPanel,billingInfo;
-	private JLabel nameLabel, startLabel, endLabel, addressLabel,intrusionInstallationLabel,fireInstallationLabel,headLabel, billHeadLabel;
+	private JLabel nameLabel, startLabel, endLabel, addressLabel,intrusionInstallationLabel,fireInstallationLabel,headLabel, billHeadLabel,emailLabel;
 	private JFrame mainFrame;
 	private LineNumberReader lnr;
 	private double total_amount= 0;
@@ -82,6 +82,12 @@ public class BillGenerator extends Component {
 		nameLabel = new JLabel(nameValue);
 		nameLabel.setFont(new Font("Cambria", Font.BOLD, 20));
 		nameLabel.setForeground(Color.DARK_GRAY);
+		
+		String emailValue = "Email : "+ customer.getEmail();
+		emailLabel = new JLabel(emailValue);
+		emailLabel.setFont(new Font("Cambria", Font.BOLD, 20));
+		emailLabel.setForeground(Color.DARK_GRAY);
+		
 
 		String service_start = "Service start :" + customer.getServiceStart();
 		startLabel = new JLabel(service_start);
@@ -110,6 +116,7 @@ public class BillGenerator extends Component {
 		custInfoPanel.add(picLabel);
 		custInfoPanel.add(service_id);
 		custInfoPanel.add(nameLabel);
+		custInfoPanel.add(emailLabel);
 		custInfoPanel.add(startLabel);
 		custInfoPanel.add(endLabel);
 		custInfoPanel.add(addressLabel);
@@ -261,6 +268,7 @@ public class BillGenerator extends Component {
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(fr);
 			c.setName((String) jsonObject.get("name"));
+			c.setEmail((String) jsonObject.get("email"));
 			service_contract_id =(String) jsonObject.get("service_id");
 			System.out.println("The first name is: " + (String) jsonObject.get("name"));
 			c.setServiceStart((String)jsonObject.get("service_start"));
