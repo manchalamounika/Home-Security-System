@@ -92,5 +92,8 @@ public class BuildingView {
 		//https://docs.oracle.com/javase/tutorial/uiswing/components/tabbedpane.html
 		return twoColPanel;
 	}
+	public JPanel getTwoColPanel() {
+		return this.twoColPanel;
+	}
 	
 }
