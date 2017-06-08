@@ -8,7 +8,9 @@ package scu.coen275.sosafe;
  *
  */
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -41,10 +43,21 @@ public class GenScheduleWindow extends JPanel{
 	public JPanel createProfileWindow() {
 		profilePanel = new JPanel(new FlowLayout());
 		profilePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		profilePanel.setBackground(new Color(10, 199, 116));
+		
 		final JCheckBox tempSensorChkBox = new JCheckBox("Temperature");
 		tempSensorChkBox.setName("temperature");
+		tempSensorChkBox.setPreferredSize(new Dimension(120, 45));
+		tempSensorChkBox.setFont(new Font("Serif", Font.BOLD, 16));
+		tempSensorChkBox.setBackground(Color.white);
+		tempSensorChkBox.setForeground(Color.DARK_GRAY);
+		
 	    final JCheckBox motionSensorChkBox = new JCheckBox("Motion");
 	    motionSensorChkBox.setName("motion");
+		motionSensorChkBox.setPreferredSize(new Dimension(120, 45));
+		motionSensorChkBox.setFont(new Font("Serif", Font.BOLD, 16));
+		motionSensorChkBox.setBackground(Color.white);
+		motionSensorChkBox.setForeground(Color.DARK_GRAY);
 	    
 	    startHr = new JLabel("Start Hour");
 	    startMin = new JLabel("Start Minute");
@@ -68,17 +81,33 @@ public class GenScheduleWindow extends JPanel{
 	    	mm.add(temp);
 	    }
 	    JComboBox jBox = jc.createCustomCombo(rL);
+	    jBox.setPreferredSize(new Dimension(90,45));
+		jBox.setForeground(Color.red);
+		jBox.setBackground(Color.WHITE);
+		
 	    ComboBoxGen jc1 = new  ComboBoxGen();
 	    JComboBox hourBox = jc1.createGenCombo(hh);
+	    hourBox.setPreferredSize(new Dimension(90,45));
+		hourBox.setForeground(Color.red);
+		hourBox.setBackground(Color.WHITE);
 	    
 	    ComboBoxGen jc2 = new  ComboBoxGen();
 	    JComboBox ehourBox = jc2.createGenCombo(hh);
+	    ehourBox.setPreferredSize(new Dimension(90,45));
+		ehourBox.setForeground(Color.red);
+		ehourBox.setBackground(Color.WHITE);
 	    
 	    ComboBoxGen jc3 = new  ComboBoxGen();
 	    JComboBox minBox = jc3.createGenCombo(mm);
+	    minBox.setPreferredSize(new Dimension(90,45));
+		minBox.setForeground(Color.red);
+		minBox.setBackground(Color.WHITE);
 	    
 	    ComboBoxGen jc4 = new  ComboBoxGen();
 	    JComboBox eminBox = jc4.createGenCombo(mm);
+	    eminBox.setPreferredSize(new Dimension(90,45));
+		eminBox.setForeground(Color.red);
+		eminBox.setBackground(Color.WHITE);
 	    
 	    schedulePanel.add(jBox);
 	    schedulePanel.add(startHr);
@@ -89,12 +118,20 @@ public class GenScheduleWindow extends JPanel{
 	    schedulePanel.add(ehourBox);
 	    schedulePanel.add(endMin);
 	    schedulePanel.add(eminBox);
-		
+	    schedulePanel.add(new JLabel("   "));
 		
 	    schedulePanel.add(tempSensorChkBox);
+	    schedulePanel.add(new JLabel("   "));
+	    
 	    schedulePanel.add(motionSensorChkBox);
-		JButton scheduleSave = new JButton("Save");
+	    schedulePanel.add(new JLabel("   "));
+	    
+	    JButton scheduleSave = new JButton("Save");
 		scheduleSave.setActionCommand("save");
+		scheduleSave.setForeground(Color.white);
+		scheduleSave.setFont(new Font("Serif", Font.BOLD, 18));
+		scheduleSave.setPreferredSize(new Dimension(90,45));
+		scheduleSave.setBackground(Color.red);
 		scheduleSave.addActionListener(new ScheduleSetUpListener(this.twoColPanel,profilePanel, jBox, tempSensorChkBox, motionSensorChkBox,hourBox,minBox, ehourBox, eminBox));
 		
 		//bSave.addActionListener(new SaveClickListener(twoColPanel, jBox, tempSensorChkBox, motionSensorChkBox));
