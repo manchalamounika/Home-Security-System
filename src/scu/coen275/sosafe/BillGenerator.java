@@ -29,7 +29,7 @@ public class BillGenerator extends Component {
 
 
 	private JPanel custInfoPanel, twoPanel,billingInfo;
-	private JLabel nameLabel, startLabel, endLabel, addressLabel,intrusionInstallationLabel,fireInstallationLabel;
+	private JLabel nameLabel, startLabel, endLabel, addressLabel,intrusionInstallationLabel,fireInstallationLabel,headLabel, billHeadLabel;
 	private JFrame mainFrame;
 	private LineNumberReader lnr;
 	private double total_amount= 0;
@@ -46,12 +46,15 @@ public class BillGenerator extends Component {
 		custInfoPanel = new JPanel();
 		custInfoPanel.setLayout(new BoxLayout(custInfoPanel, BoxLayout.Y_AXIS));
 		custInfoPanel.setPreferredSize(new Dimension(300, 700));
-		custInfoPanel.setBorder(BorderFactory.createTitledBorder("Customer Information"));
+		custInfoPanel.setBorder(BorderFactory.createMatteBorder(7, 7, 7, 7, Color.ORANGE));
+		custInfoPanel.setBackground(Color.white);
 
 		billingInfo = new JPanel();
 		billingInfo.setLayout(new BoxLayout(billingInfo, BoxLayout.Y_AXIS));
 		billingInfo.setPreferredSize(new Dimension(300, 700));
 		billingInfo.setBorder(BorderFactory.createTitledBorder("Bill Information"));
+		billingInfo.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(244, 244, 244)));
+		billingInfo.setBackground(Color.white);
 		
 	}
 
@@ -66,26 +69,45 @@ public class BillGenerator extends Component {
 		
 		Customer customer = new Customer();
 		getCustomerInfo(customer);
+		
+		headLabel = new JLabel("Customer Information");
+		headLabel.setFont(new Font("serif", Font.BOLD, 25));
+		headLabel.setForeground(new Color(0, 12, 155));
+
+		ImageIcon image = new ImageIcon("img/monika.png");
+		JLabel picLabel = new JLabel(image);
+		
 			
 		String nameValue = "Name : "+ customer.getName();
 		nameLabel = new JLabel(nameValue);
-		nameLabel.setFont(new Font("Cambria", Font.BOLD, 23));
-
+		nameLabel.setFont(new Font("Cambria", Font.BOLD, 20));
+		nameLabel.setForeground(Color.DARK_GRAY);
 
 		String service_start = "Service start :" + customer.getServiceStart();
 		startLabel = new JLabel(service_start);
-		startLabel.setFont(new Font("Cambria", Font.BOLD, 23));
+		startLabel.setFont(new Font("Cambria", Font.BOLD, 20));
+		startLabel.setForeground(Color.DARK_GRAY);
 
 		String service_end = "Service start :" + customer.getServiceEnd();
 		endLabel = new JLabel(service_end);
-		endLabel.setFont(new Font("Cambria", Font.BOLD, 23));
+		endLabel.setFont(new Font("Cambria", Font.BOLD, 20));
+		endLabel.setForeground(Color.DARK_GRAY);
 
 		
 		String address[] =  customer.getAddress().split(",");
 		addressLabel = new JLabel("Address :");
 		JLabel[] tempLabel= new JLabel[address.length];
+		addressLabel.setFont(new Font("serif", Font.BOLD, 20));
+		addressLabel.setForeground(Color.DARK_GRAY);
+		
 		JLabel service_id = new JLabel("Service Contract ID: "+service_contract_id);
-		addressLabel.setFont(new Font("Cambria", Font.BOLD, 23));
+		service_id.setFont(new Font("serif", Font.BOLD, 20));
+		service_id.setForeground(Color.DARK_GRAY);
+		
+		addressLabel.setFont(new Font("Cambria", Font.BOLD, 20));
+		custInfoPanel.add(Box.createRigidArea(new Dimension(200, 100)));
+		custInfoPanel.add(headLabel);
+		custInfoPanel.add(picLabel);
 		custInfoPanel.add(service_id);
 		custInfoPanel.add(nameLabel);
 		custInfoPanel.add(startLabel);
@@ -96,24 +118,31 @@ public class BillGenerator extends Component {
 			tempLabel[i].setText(address[i]);
 			custInfoPanel.add(tempLabel[i]);
 		}
+		billHeadLabel = new JLabel("Billing Information");
+		billHeadLabel.setFont(new Font("serif", Font.BOLD, 20));
+		billHeadLabel.setForeground(new Color(0, 12, 155));
 		
 		
-		intrusionInstallationLabel = new JLabel("Intrusion Package Installation---->200");
+		intrusionInstallationLabel = new JLabel("Intrusion Package Installation---------------------------------------------------------------------->200");
+		intrusionInstallationLabel.setFont(new Font("serif", Font.PLAIN, 14));
+		intrusionInstallationLabel.setForeground(Color.black);
 		intrusionInstallationLabel.setVisible(false);
 		
-		fireInstallationLabel = new JLabel("Fire Detection Package Installation---->300");
+		
+		fireInstallationLabel = new JLabel("Fire Detection Package Installation----------------------------------------------------------------->300");
+		fireInstallationLabel.setFont(new Font("serif", Font.PLAIN, 14));
+		fireInstallationLabel.setForeground(Color.black);
 		fireInstallationLabel.setVisible(false);
 		
+		billingInfo.add(billHeadLabel);
+		billingInfo.add(new JLabel("                  "));
 		billingInfo.add(intrusionInstallationLabel);
 		billingInfo.add(fireInstallationLabel);
 	
 		generateBill(billingInfo);			
 		twoPanel.add(custInfoPanel);
 		twoPanel.add(billingInfo);
-//		 double val = getDummyVal();
-//		 JLabel l = new JLabel();
-//		 l.setText(""+val);
-//		 twoPanel.add(l);
+
 		return twoPanel;
 	}
 
@@ -132,8 +161,11 @@ public class BillGenerator extends Component {
 		
  		Properties p = new Properties();
 		try{
-			JLabel heading = new JLabel("---Sensors installation---");
+			JLabel heading = new JLabel("------------------Sensors Installation------------------");
 			billingInfo.add(heading);
+			heading.setForeground(Color.ORANGE);
+			heading.setFont(new Font("serif", Font.PLAIN, 18));
+			
 			p.load(new FileInputStream("res/sensor_states.properties"));
 			Set<Object> keys= p.keySet();
 			int intrusionPackage = 0;
@@ -146,43 +178,49 @@ public class BillGenerator extends Component {
 					intrusionPackage++;
 					intrusionInstallationLabel.setVisible(true);
 					total_amount = total_amount + 50.00;
-					JLabel jb = new JLabel("Motion Sensor in "+b[2]+" "+b[3]+"-->"+50);
+					JLabel jb = new JLabel("Motion Sensor in "+b[2]+" "+b[3]+"----------------------------------------------------------------------------------------------->"+50);
 					billingInfo.add(jb);
 				}
 				else{
 					fireInstallationLabel.setVisible(true);
 					fireDetecionPackage++;
 					total_amount = total_amount + 100.00;
-					JLabel j = new JLabel("Temperature Sensor in "+b[2]+" "+b[3]+"-->"+100);
+					JLabel j = new JLabel("Temperature Sensor in "+b[2]+" "+b[3]+"------------------------------------------------------------------------------------->"+100);
 					billingInfo.add(j);
 				}				
 				System.out.println(b);
 			}
 			
 			JLabel t = new JLabel("-----------------------Intrusion detected Info-------------------------");
+			t.setForeground(Color.orange);
+			t.setFont(new Font("serif", Font.PLAIN, 18));
 			billingInfo.add(t);
 			br = new BufferedReader(new FileReader("res/triggeredIntrusionInfo.txt"));
 			String line;
 			while((line = br.readLine()) != null){
 				total_amount += 20;
-				JLabel l = new JLabel(line+"------------->20");
+				JLabel l = new JLabel(line+"--------------------------------------------------------------------->20");
 				billingInfo.add(l);
 			}
 			
 			br1 = new BufferedReader(new FileReader("res/triggeredFireInfo.txt"));
 			JLabel t1 = new JLabel("-----------------------Fire detected Info-------------------------");
+			t1.setForeground(Color.ORANGE);
+			t1.setFont(new Font("serif", Font.PLAIN, 18));
 			billingInfo.add(t1);
 			String line2;
 			while((line2 = br1.readLine()) != null){
 				total_amount += 50;
 				JLabel l1 = new JLabel();
-				l1.setText(line2+"------------->50");
+				l1.setText(line2+"-------------------------------------------------------------------------->50");
 				billingInfo.add(l1);
 			}
 			if (intrusionPackage > 0 && fireDetecionPackage > 0){
 				JLabel t3 = new JLabel("----------------Discounts------------");
+				t3.setForeground(Color.orange);
+				t3.setFont(new Font("serif", Font.PLAIN, 18));
 				billingInfo.add(t3);
-				JLabel d = new JLabel("You are having both the packages so we are providing 20% discount on fire detction packge on 300$---->240");
+				JLabel d = new JLabel("If both Package then 20% discount on $300 Fire Detection Package---------------------------------->(-)60");
 				billingInfo.add(d);
 				total_amount = total_amount + 200 +240;
 			}
@@ -191,10 +229,15 @@ public class BillGenerator extends Component {
 			}
 			else
 				total_amount= total_amount + 300;
-			JLabel finalamt = new JLabel("--------------------Toatal Amount is--------------");
+			JLabel finalamt = new JLabel("-----------------Toatal Amount in Dollars is------------");
+			finalamt.setForeground(Color.orange);
+			finalamt.setFont(new Font("serif", Font.PLAIN, 18));
+			
 			billingInfo.add(finalamt);
-			JLabel amt = new JLabel("Total amount-------------->");
-			amt.setText(""+total_amount);
+			JLabel amt = new JLabel("Total amount in Dollars--------------------------------------------------->");
+			amt.setForeground(new Color(10, 199, 116));
+			amt.setFont(new Font("serif", Font.BOLD, 18));
+			amt.setText("Total----------------------------------------------------------------------------->"+total_amount);
 			billingInfo.add(amt);
 		}
 		catch(IOException e){
@@ -284,7 +327,6 @@ public class BillGenerator extends Component {
 			try {
 				lnr.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return lnr.getLineNumber();
