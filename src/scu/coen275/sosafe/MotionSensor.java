@@ -39,7 +39,9 @@ public class MotionSensor extends Sensor {
 		System.out.println("motionSensorId::::"+ motionSensorName);
 	}
 	public JLabel getMotionSensor() {
-		motionSensor.setVisible(false);
+
+		motionSensor.setVisible(super.sensor_activated);
+
 		return motionSensor;
 	}
 
