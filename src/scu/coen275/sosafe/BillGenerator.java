@@ -4,6 +4,7 @@
  */
 package scu.coen275.sosafe;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,6 +27,7 @@ import org.json.simple.parser.ParseException;
 
 public class BillGenerator extends Component {
 
+
 	private JPanel custInfoPanel, twoPanel,billingInfo;
 	private JLabel nameLabel, startLabel, endLabel, addressLabel,intrusionInstallationLabel,fireInstallationLabel;
 	private JFrame mainFrame;
@@ -34,8 +36,10 @@ public class BillGenerator extends Component {
 	private BufferedReader br,br1;
 
 
+
 	public BillGenerator(JFrame mainFrame){
 		this.mainFrame = mainFrame;
+
 		twoPanel = new JPanel(new GridLayout(1,2));
 		twoPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		custInfoPanel = new JPanel();
@@ -54,13 +58,17 @@ public class BillGenerator extends Component {
 	{
 		return this.twoPanel;
 	}
+
+
 	public JPanel createBillWindow()
 	{
 		Customer customer = new Customer();
 		getCustomerInfo(customer);
+
 		String nameValue = "Name : "+ customer.getName();
 		nameLabel = new JLabel(nameValue);
 		nameLabel.setFont(new Font("Cambria", Font.BOLD, 23));
+
 
 		String service_start = "Service start :" + customer.getServiceStart();
 		startLabel = new JLabel(service_start);
@@ -69,6 +77,7 @@ public class BillGenerator extends Component {
 		String service_end = "Service start :" + customer.getServiceEnd();
 		endLabel = new JLabel(service_end);
 		endLabel.setFont(new Font("Cambria", Font.BOLD, 23));
+
 
 		String address[] =  customer.getAddress().split(",");
 		addressLabel = new JLabel("Address :");
@@ -200,12 +209,12 @@ public class BillGenerator extends Component {
 	}
 	
 
+
 	public void getCustomerInfo(Customer c){
 		try{
 			FileReader fr = new FileReader("res/customer.json");
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(fr);
-
 			c.setName((String) jsonObject.get("name"));
 			System.out.println("The first name is: " + (String) jsonObject.get("name"));
 			c.setServiceStart((String)jsonObject.get("service_start"));
@@ -221,7 +230,9 @@ public class BillGenerator extends Component {
 
 			Address adr = new Address(line1, line2, city, state, zip);
 			c.setAddress(adr);
+
 			generateTotalAmount();
+
 
 		}
 		catch (FileNotFoundException e) {

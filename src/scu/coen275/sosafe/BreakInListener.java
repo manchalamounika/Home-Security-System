@@ -27,14 +27,18 @@ public class BreakInListener implements ActionListener {
 		components1 = new ArrayList<Component>();
 	}
 
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
+
 		listAllComponentsIn(this.twoColPanel);
 		JPanel roomPanelA = findComponent(simBox.getSelectedItem().toString());
 		System.out.println("roomPanelA:::::::"+roomPanelA);
 		Icon myImgIcon = new ImageIcon("res/breakIn.gif");
 		Icon myImgIcon1 = new ImageIcon("res/breakIn.gif");
 		JLabel imageLbl = new JLabel(myImgIcon);
+
 		Boolean sensor_enabled = Boolean.parseBoolean(findFromPropertiesFile("motion_sensor_"+simBox.getSelectedItem().toString()));
 		if(sensor_enabled) {
 			Billing b= new Billing();
@@ -44,6 +48,7 @@ public class BreakInListener implements ActionListener {
 			roomPanelA.repaint();
 	    	
 	    	JOptionPane.showMessageDialog(twoColPanel,"A call is being placed to fire department");
+
 		//http://makeagif.com/gif/fire-sprinkler-test-with-water-_AI68u
 		Timer SimpleTimer = new Timer(5500, new ActionListener(){
 		    @Override
@@ -57,16 +62,20 @@ public class BreakInListener implements ActionListener {
 		else
 		{
 			imageLbl.setIcon(myImgIcon1);
+
 			roomPanelA.add(imageLbl, BorderLayout.CENTER);
 			roomPanelA.revalidate();
 			roomPanelA.repaint();
 		}	
 	}
+
 	public void listAllComponentsIn(Container parent)
 	{
 	    for (Component c : parent.getComponents())
 	    {
+
 	    	if(c!=null && c.getName()!=null && c instanceof JPanel) {
+
 	    		components1.add(c);	
 	    	}
 	        if (c instanceof Container)
@@ -76,6 +85,7 @@ public class BreakInListener implements ActionListener {
 	
 	public JPanel findComponent(String panelName)
 	{
+
 		JPanel motion = null;
 	   for(int i =0; i<components1.size(); i++) {
 		   System.out.println("findComponent------->"+components1.get(i).getName() +":::::panelName"+panelName);
@@ -86,6 +96,7 @@ public class BreakInListener implements ActionListener {
 		   }
 	   }
 	return motion;
+
 	    
 	}
 	

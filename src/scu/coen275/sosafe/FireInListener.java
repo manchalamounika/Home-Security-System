@@ -19,6 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
+ * 
+ */
+
+/**
  * @author mounika
  *
  */
@@ -48,6 +52,7 @@ public class FireInListener implements ActionListener {
 		JLabel imageLbl = new JLabel(myImgIcon);
 		Boolean sensor_enabled = Boolean.parseBoolean(findFromPropertiesFile("temperature_sensor_"+simBox.getSelectedItem().toString()));
 		if(sensor_enabled) {
+
 			Billing b= new Billing();
 			b.fireDetected("A fire has occurred on");
 			roomPanelA.add(imageLbl, BorderLayout.CENTER);
@@ -63,14 +68,17 @@ public class FireInListener implements ActionListener {
 				}
 			});
 			SimpleTimer.start();
+
 		}
 		else
 		{
 			imageLbl.setIcon(myImgIcon1);
+
 			roomPanelA.add(imageLbl, BorderLayout.CENTER);
 			roomPanelA.revalidate();
 			roomPanelA.repaint();
 		}
+
 
 	}
 
@@ -113,5 +121,23 @@ public class FireInListener implements ActionListener {
 		}
 		return pflag;
 
+	}
+	
+	private  String findFromPropertiesFile(String propertyNm) {
+		FileInputStream in =null;
+		String pflag =null;
+		Properties s_state = new Properties();
+		try {
+			in = new FileInputStream("res/sensor_states.properties");
+			s_state.load(in);
+			in.close();
+			if(s_state.getProperty(propertyNm) != null)
+				pflag = s_state.getProperty(propertyNm);
+		}
+		catch(IOException e){
+		}
+		System.out.println("FireInListenerrrrrrr"+pflag);
+		return pflag;
+		
 	}
 }

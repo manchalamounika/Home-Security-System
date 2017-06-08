@@ -4,7 +4,6 @@ package scu.coen275.sosafe;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -21,6 +20,7 @@ public class Login extends JFrame implements ActionListener
 
 		Container cn = getContentPane();
 		cn.setLayout(new FlowLayout());
+
 		label = new JLabel();
 		label.setText("PIN:");
 		text = new JPasswordField(5);
@@ -41,16 +41,19 @@ public class Login extends JFrame implements ActionListener
 		String value2=text.getText();
 		if (value2.equals("12345")) {
 
+
 			JFrame mainFrame = new JFrame("Room Layout");
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			mainFrame.setSize(1200, 1200);
 			JTabbedPane tabbedPane = new JTabbedPane();
 			BuildingView m = new BuildingView(mainFrame);
+
 			BillGenerator b = new BillGenerator(mainFrame);
 
 			ImageIcon profile_icon = new ImageIcon("res/user_profile");
 			tabbedPane.addTab("BuildingLayout",profile_icon,m.createWindow(false));
 			tabbedPane.addTab("Customer Profile",profile_icon,new JPanel());
+
 			JPanel pp =b.createBillWindow();
 			tabbedPane.addTab("BillingInfo",profile_icon,pp);
 			ChangeListener changeListener = new ChangeListener() {
