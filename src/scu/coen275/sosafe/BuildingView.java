@@ -34,6 +34,9 @@ public class BuildingView {
 		roomsPanel = new JPanel(new GridLayout(3,1));
 		formPanel = new JPanel(new FlowLayout());
 		formElePanel = new JPanel(new GridLayout(2,1));
+		formElePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		formElePanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+		formElePanel.setBorder(BorderFactory.createTitledBorder("<html><font color = #bbfaaf>Installing and activating the sensors</font></html>"));
 		simulationPanel = new JPanel();
 		BoxLayout simulationLayout = new BoxLayout(simulationPanel, BoxLayout.X_AXIS);
 		simulationPanel.setLayout(new FlowLayout());

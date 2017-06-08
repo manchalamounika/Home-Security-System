@@ -73,7 +73,7 @@ public class Login extends JFrame implements ActionListener
 
 			JFrame mainFrame = new JFrame("Room Layout");
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			mainFrame.setSize(1200, 1200);
+			mainFrame.setSize(1500, 1000);
 			JTabbedPane tabbedPane = new JTabbedPane();
 			BuildingView m = new BuildingView(mainFrame);
 
