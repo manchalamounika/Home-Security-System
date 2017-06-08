@@ -52,8 +52,8 @@ public class Login extends JFrame implements ActionListener
 
 			ImageIcon profile_icon = new ImageIcon("res/user_profile");
 			tabbedPane.addTab("BuildingLayout",profile_icon,m.createWindow(false));
-			tabbedPane.addTab("Customer Profile",profile_icon,new JPanel());
-
+			//tabbedPane.addTab("Customer Profile",profile_icon,new JPanel());
+			tabbedPane.addTab("Schedule",profile_icon,new GenScheduleWindow(m.getTwoColPanel(), m.getRoomsArray()).createProfileWindow());
 			JPanel pp =b.createBillWindow();
 			tabbedPane.addTab("BillingInfo",profile_icon,pp);
 			ChangeListener changeListener = new ChangeListener() {

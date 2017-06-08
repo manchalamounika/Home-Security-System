@@ -106,23 +106,7 @@ public class FireInListener implements ActionListener {
 
 	}
 
-	private  String findFromPropertiesFile(String propertyNm) {
-		FileInputStream in =null;
-		String pflag =null;
-		Properties s_state = new Properties();
-		try {
-			in = new FileInputStream("res/sensor_states.properties");
-			s_state.load(in);
-			in.close();
-			if(s_state.getProperty(propertyNm) != null)
-				pflag = s_state.getProperty(propertyNm);
-		}
-		catch(IOException e){
-		}
-		return pflag;
 
-	}
-	
 	private  String findFromPropertiesFile(String propertyNm) {
 		FileInputStream in =null;
 		String pflag =null;
