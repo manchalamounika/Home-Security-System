@@ -20,6 +20,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author mounika
@@ -35,13 +36,12 @@ public class ScheduleSetUpListener implements ActionListener {
 	private JComboBox ehourBox; 
 	private JComboBox eminBox;
 	private JPanel twoColPanel;
+	private TableLView tv;
+	private DefaultTableModel dt;
 	
-	public ScheduleSetUpListener() {
-		
-	}
 
 	public ScheduleSetUpListener(JPanel twoColPanel,JPanel profilePanel, JComboBox jBox, JCheckBox tempSensorChkBox,
-			JCheckBox motionSensorChkBox, JComboBox hourBox, JComboBox minBox, JComboBox ehourBox, JComboBox eminBox) {
+			JCheckBox motionSensorChkBox, JComboBox hourBox, JComboBox minBox, JComboBox ehourBox, JComboBox eminBox,TableLView tv, DefaultTableModel dt) {
 		this.profilePanel = profilePanel;
 		this.jBox = jBox;
 		this.tempSensorChkBox = tempSensorChkBox;
@@ -51,6 +51,9 @@ public class ScheduleSetUpListener implements ActionListener {
 		this.ehourBox = ehourBox;
 		this.eminBox = eminBox;
 		this.twoColPanel = twoColPanel;
+		this.tv =tv;
+		this.dt =dt;
+		
 	}
 
 	/* (non-Javadoc)
@@ -101,6 +104,7 @@ public class ScheduleSetUpListener implements ActionListener {
 				}
 
 			}
+			//tv.updateTableWithChanges(dt);
 			System.out.println("Data Written to file for scheduling");
 		}
 		catch(IOException ex) {
@@ -111,12 +115,15 @@ public class ScheduleSetUpListener implements ActionListener {
 			try {
 				sensor_schedule.store(output, null);
 				output.close();
+				profilePanel.revalidate();
+				profilePanel.repaint();
+				tv.updateTableWithChanges(dt);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
-
+		
 	}
 
 	private String getUniqueNameForSchedule(String sensorTyp, String roomName, String startEnd) {

@@ -9,6 +9,13 @@ public class Customer {
 	private String emgContact_2;
 	private String serviceStart;
 	private String serviceEnd;
+	private String email;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getName() {
 		return name;
 	}
