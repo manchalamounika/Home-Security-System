@@ -47,7 +47,7 @@ public class BreakInListener implements ActionListener {
 			roomPanelA.revalidate();
 			roomPanelA.repaint();
 	    	
-	    	JOptionPane.showMessageDialog(twoColPanel,"A call is being placed to fire department");
+	    	JOptionPane.showMessageDialog(twoColPanel,"A call is being placed to police department");
 
 		//http://makeagif.com/gif/fire-sprinkler-test-with-water-_AI68u
 		Timer SimpleTimer = new Timer(5500, new ActionListener(){
