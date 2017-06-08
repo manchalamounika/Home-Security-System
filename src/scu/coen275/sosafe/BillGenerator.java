@@ -34,6 +34,7 @@ public class BillGenerator extends Component {
 	private LineNumberReader lnr;
 	private double total_amount= 0;
 	private BufferedReader br,br1;
+	private String service_contract_id;
 
 
 
@@ -62,9 +63,10 @@ public class BillGenerator extends Component {
 
 	public JPanel createBillWindow()
 	{
+		
 		Customer customer = new Customer();
 		getCustomerInfo(customer);
-
+			
 		String nameValue = "Name : "+ customer.getName();
 		nameLabel = new JLabel(nameValue);
 		nameLabel.setFont(new Font("Cambria", Font.BOLD, 23));
@@ -78,13 +80,13 @@ public class BillGenerator extends Component {
 		endLabel = new JLabel(service_end);
 		endLabel.setFont(new Font("Cambria", Font.BOLD, 23));
 
-
+		
 		String address[] =  customer.getAddress().split(",");
 		addressLabel = new JLabel("Address :");
 		JLabel[] tempLabel= new JLabel[address.length];
-		
+		JLabel service_id = new JLabel("Service Contract ID: "+service_contract_id);
 		addressLabel.setFont(new Font("Cambria", Font.BOLD, 23));
-
+		custInfoPanel.add(service_id);
 		custInfoPanel.add(nameLabel);
 		custInfoPanel.add(startLabel);
 		custInfoPanel.add(endLabel);
@@ -216,6 +218,7 @@ public class BillGenerator extends Component {
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(fr);
 			c.setName((String) jsonObject.get("name"));
+			service_contract_id =(String) jsonObject.get("service_id");
 			System.out.println("The first name is: " + (String) jsonObject.get("name"));
 			c.setServiceStart((String)jsonObject.get("service_start"));
 			c.setServiceEnd((String) jsonObject.get("service_end"));

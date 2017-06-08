@@ -12,7 +12,7 @@ public class MainWindow {
 		System.out.println("I m triggered to take necessary");
 		Login login = new Login();
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		login.setSize(1200, 1200);
+		login.setSize(1500, 1000);
 		login.setVisible(true);
 	}
 
