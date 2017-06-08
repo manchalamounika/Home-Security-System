@@ -4,6 +4,7 @@ package scu.coen275.sosafe;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 public class Room extends JPanel{
 	
@@ -54,6 +54,7 @@ public class Room extends JPanel{
 	public JPanel createRoom() {
 		
 		roomPanel.setLayout(roomLayout);
+		roomPanel.setBackground(new Color(255, 204, 0));
 		roomPanel.add(tempSensor.getTempSensor());
 		roomPanel.add(motionSensor.getMotionSensor());
 
